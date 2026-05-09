@@ -50,3 +50,21 @@ type Post {
 type Query {
   posts: [Post!]!
 }
+
+type Mutation {
+  CreateUser(createUserInput: CreateUserInput!): User!
+  signIn(SignInInput: signInInput!): String!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+  email: String!
+  bio: String
+  avatar: String
+}
+
+input signInInput {
+  email: String!
+  password: String!
+}
