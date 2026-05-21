@@ -21,10 +21,10 @@ const navbar = (props: PropsWithChildren) => {
 
   return (
     <nav className={cn(
-        "w-full h-16 fixed top-0 left-0 z-50 transition-all duration-300",
+        " hidden md:block w-full h-16 fixed top-0 left-0 z-50 transition-all duration-300",
         isScrollDown ? "bg-white/80 backdrop-blur-sm shadow-md" : "bg-transparent"
     )}>
-      <div> {props.children} </div>
+      <div className="max-w-7xl mx-auto h-full px-6 flex items-center"> {props.children} </div>
     </nav>
     
   );

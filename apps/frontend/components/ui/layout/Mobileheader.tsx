@@ -1,17 +1,19 @@
-"use client"
-import { cn } from "@/lib/utils";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren } from "react";
+import SideBar from "./sidebar";
+import { Bars3Icon } from "@heroicons/react/16/solid";
 
-
-const navbar = (props: PropsWithChildren) => {
- 
-
+type Props = PropsWithChildren;
+const MobileNavbar = (props: Props) => {
   return (
-    <nav 
-    >
-        sdfsdf
-    </nav>
-    
+    <div className="md:hidden">
+      <SideBar
+        triggerIcon={<Bars3Icon className="w-4" />}
+        triggerClassName="absolute top-2 left-2"
+      >
+        {props.children}
+      </SideBar>
+    </div>
   );
 };
-export default navbar;
+
+export default MobileNavbar;
