@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { PropsWithChildren, ReactNode, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
@@ -25,7 +26,6 @@ useOnClickOutside(ref as React.RefObject<HTMLElement>, () => {
           { "-left-full ": !show, "left-0": show },
         )}
       >
-        {" "}
         {props.children}
       </div>
     </>
