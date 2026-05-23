@@ -4,9 +4,11 @@ import { print } from "graphql";
 import {  fetchGraphQL } from "../fetchGraphQL";
 import { GET_POSTS } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
+import { transformTakeSkip } from "../helper";
 
 
-export const fetchPosts = async () => {
+export const fetchPosts = async ({page, perPage}: {page?: Float, perPage?: Float}) => {
+  const { skip, take } = transformTakeSkip({page, perPage});
   const query = `
     query {
       posts {
@@ -20,7 +22,10 @@ export const fetchPosts = async () => {
     }
   `;
 
-  const data = await fetchGraphQL(query);
+  const data = await fetchGraphQL(query,{
+    skip,
+    take
+  });
 
-  return data.posts;
+  return {posts : data.posts as Post[], totalPosts :data.postCount as number};
 };

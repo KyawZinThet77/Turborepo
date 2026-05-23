@@ -17,15 +17,20 @@ export class PostResolver {
 
   // @UseGuards(JwtAuthGuard)
   @Query(() => [Post], { name: 'posts' })
-  findAll(@Context() context) {
+  findAll(
+    @Context() context,
+    @Args('skip', { type: () => Int, nullable: true }) skip?: number,
+    @Args('take', { type: () => Int, nullable: true }) take?: number,
+  ) {
     const user = context.req.user; // Access the authenticated user from the request
-    return this.postService.findAll();
+    return this.postService.findAll({skip,take});
   }
 
-  // @Query(() => Post, { name: 'post' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.postService.findOne(id);
-  // }
+  @Query(() => Int, { name: 'postCount' })
+      count() {
+          return this.postService.count();
+      }
+  } 
 
   // @Mutation(() => Post)
   // updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
@@ -36,4 +41,3 @@ export class PostResolver {
   // removePost(@Args('id', { type: () => Int }) id: number) {
   //   return this.postService.remove(id);
   // }
-}
