@@ -55,7 +55,7 @@ type AuthPayload {
 }
 
 type Query {
-  posts(skip: Int, take: Int): [Post!]!
+  posts(skip: Float, take: Float): [Post!]!
   postCount: Int!
 }
 

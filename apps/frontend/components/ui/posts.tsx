@@ -1,9 +1,13 @@
 import { PropsWithChildren } from "react";
 import PostCard from "./postCard";
 import { Post } from "@/lib/types/modelTypes";
+import Pagination from "./desktop/pagination";
 
 type Props = {
   posts: Post[];
+  totalPosts: number;
+  currentPage: number;
+  totalPages: number;
 };
 const NavbarContainer = (props: Props) => {
   return (
@@ -17,7 +21,15 @@ const NavbarContainer = (props: Props) => {
         {props.posts.map((post) => (
           <PostCard key={post.id} {...post} />
         ))}
-      </div></div>
+      </div>
+
+      {props.totalPages}
+      <div>
+        <Pagination  className="mt-4"
+        currentPage={props.currentPage}
+        totalPages={props.totalPages}/>   
+      </div>
+      </div>
     </section>
   );
 };

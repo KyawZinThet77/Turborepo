@@ -1,7 +1,7 @@
 import { BACKEND_URL } from "./constants";
 
 export const fetchGraphQL = async (
-  query: string,
+  query:  string,
   variables = {}
 ) => {
   try {
