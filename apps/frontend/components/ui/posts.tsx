@@ -22,8 +22,6 @@ const NavbarContainer = (props: Props) => {
           <PostCard key={post.id} {...post} />
         ))}
       </div>
-
-      {props.totalPages}
       <div>
         <Pagination  className="mt-4"
         currentPage={props.currentPage}

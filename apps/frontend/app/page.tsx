@@ -21,16 +21,13 @@ export default async function Home({ searchParams }: Props) {
     page,
   });
 
-  console.log("Total Posts:", totalPosts);
 
   return (
     <main>
       <Hero />
       
       <Posts posts={posts} totalPosts={totalPosts} currentPage={page ? +page : 1} totalPages={Math.ceil(totalPosts / +DEFAULT_POSTS_PER_PAGE)} />
-   {totalPosts && <p className="text-center mt-4 text-gray-500">
-        Total Posts: {totalPosts}
-      </p>}
+   
     </main>
   );
 }

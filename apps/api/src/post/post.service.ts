@@ -25,6 +25,10 @@ export class PostService {
     return await this.prisma.post.count();
   }
 
+    async findOne(id : number) {
+    return await this.prisma.post.findUnique({ where: { id }, include: { author: true, tags:true } });
+  }
+
   // findOne(id: number) {
   //   return `This action returns a #${id} post`;
   // }

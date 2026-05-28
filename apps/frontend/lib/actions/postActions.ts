@@ -2,7 +2,7 @@
 
 import { print } from "graphql";
 import {  fetchGraphQL } from "../fetchGraphQL";
-import { GET_POSTS } from "../gqlQueries";
+import { GET_POSTS, GET_POSTS_ByID } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
@@ -16,6 +16,10 @@ export const fetchPosts = async ({page, perPage}: {page?: any, perPage?: any}) =
     skip,
     take
   });
-console.log("Fetched data:", data);
   return {posts : data.posts as Post[], totalPosts :data.postCount as number};
 };
+
+export const fetchPostById= async (id: number) => {
+  const data = await fetchGraphQL(print(GET_POSTS_ByID),{id});
+  return data.getPostById as Post;
+}
