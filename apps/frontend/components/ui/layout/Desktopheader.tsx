@@ -1,5 +1,6 @@
 "use client"
 import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 import { PropsWithChildren, useEffect, useState } from "react";
 interface navbarProps {}
 
@@ -9,7 +10,7 @@ const navbar = (props: PropsWithChildren) => {
     const handleScroll = () => {
         setScrollPosition(window.scrollY)
     }
-
+    const pathname = usePathname();
     useEffect(()=>{
         window.addEventListener("scroll", handleScroll);
         return ()=> {
@@ -18,11 +19,12 @@ const navbar = (props: PropsWithChildren) => {
     })
 
     const isScrollDown = scrollPosition > 10 ;
+    const isHomePage = pathname === "/";
 
   return (
     <nav className={cn(
         " hidden md:block w-full h-16 fixed top-0 left-0 z-50 transition-all duration-300",
-        isScrollDown ? "bg-white/80 backdrop-blur-sm shadow-md" : "bg-transparent"
+        isScrollDown || !isHomePage ? "bg-white/80 backdrop-blur-sm shadow-md" : "bg-transparent"
     )}>
       <div className="max-w-7xl mx-auto h-full px-6 flex items-center"> {props.children} </div>
     </nav>

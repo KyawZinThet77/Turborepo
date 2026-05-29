@@ -16,7 +16,7 @@ export const GET_POSTS = gql`
 
 export const GET_POSTS_ByID = gql`
   query getPostById($id: Int!) {
-    post(id: $id) {
+    findOne(id: $id) {
       id
       title
       thumbnail

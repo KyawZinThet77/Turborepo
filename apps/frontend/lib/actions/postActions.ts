@@ -21,5 +21,5 @@ export const fetchPosts = async ({page, perPage}: {page?: any, perPage?: any}) =
 
 export const fetchPostById= async (id: number) => {
   const data = await fetchGraphQL(print(GET_POSTS_ByID),{id});
-  return data.getPostById as Post;
+  return data.findOne as Post;
 }
