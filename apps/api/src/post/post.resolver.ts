@@ -1,4 +1,12 @@
-import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  Context,
+  Float,
+} from '@nestjs/graphql';
 import { PostService } from './post.service';
 import { Post } from './entities/post.entity';
 import { CreatePostInput } from './dto/create-post.input';
@@ -15,25 +23,34 @@ export class PostResolver {
   //   return this.postService.create(createPostInput);
   // }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Query(() => [Post], { name: 'posts' })
-  findAll(@Context() context) {
+  findAll(
+    @Context() context,
+    @Args('skip', { type: () => Float, nullable: true }) skip?: number,
+    @Args('take', { type: () => Float, nullable: true }) take?: number,
+  ) {
     const user = context.req.user; // Access the authenticated user from the request
-    return this.postService.findAll();
+    return this.postService.findAll({ skip, take });
   }
 
-  // @Query(() => Post, { name: 'post' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.postService.findOne(id);
-  // }
+  @Query(() => Int, { name: 'postCount' })
+  count() {
+    return this.postService.count();
+  }
 
-  // @Mutation(() => Post)
-  // updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
-  //   return this.postService.update(updatePostInput.id, updatePostInput);
-  // }
-
-  // @Mutation(() => Post)
-  // removePost(@Args('id', { type: () => Int }) id: number) {
-  //   return this.postService.remove(id);
-  // }
+  @Query(() => Post)
+  findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.postService.findOne(id);
+  }
 }
+
+// @Mutation(() => Post)
+// updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
+//   return this.postService.update(updatePostInput.id, updatePostInput);
+// }
+
+// @Mutation(() => Post)
+// removePost(@Args('id', { type: () => Int }) id: number) {
+//   return this.postService.remove(id);
+// }
