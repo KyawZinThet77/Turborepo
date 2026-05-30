@@ -5,6 +5,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import SubmitButton from "@/components/ui/SubmitButton";
 
 const SignInForm = () => {
   return (
@@ -27,9 +28,10 @@ const SignInForm = () => {
         />
       </div>
 
-      <Button className="w-full">
+      {/* <Button className="w-full">
         Sign In
-      </Button>
+      </Button> */}
+      <SubmitButton className="w-full"> Sign In</SubmitButton>
     </form>
   );
 };

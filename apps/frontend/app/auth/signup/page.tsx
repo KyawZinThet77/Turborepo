@@ -5,6 +5,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import SubmitButton from "@/components/ui/SubmitButton";
 
 const SignUpForm = () => {
   return (
@@ -36,9 +37,7 @@ const SignUpForm = () => {
         />
       </div>
 
-      <Button className="w-full">
-        Sign Up
-      </Button>
+      <SubmitButton className="w-full"> Sign Up</SubmitButton>
     </form>
   );
 };
