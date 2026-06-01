@@ -1,10 +1,13 @@
 "use server";
 
+import { redirect } from "next/navigation";
+import { fetchGraphQL } from "../fetchGraphQL";
+import { CREATE_USER_MUTATION } from "../gqlQueries";
 import { SignUpFormState } from "../types/formState";
 import { SignUpSchema } from "../zodSchemas/SignUpSchema";
+import { print } from "graphql";
 
-
-export const signUpAction = async (formData: FormData, state: SignUpFormState) : Promise<SignUpFormState> => {
+export const signUpAction = async (state: SignUpFormState | undefined,formData: FormData ) : Promise<SignUpFormState> => {
 
     const validatedFields = SignUpSchema.safeParse(
         Object.fromEntries(formData.entries())
@@ -12,9 +15,23 @@ export const signUpAction = async (formData: FormData, state: SignUpFormState) :
 
     if (!validatedFields.success) {
         return {
+            data : Object.fromEntries(formData.entries()),
             errors : validatedFields.error.flatten().fieldErrors
         };
     }
+
+    const data = await fetchGraphQL(print(CREATE_USER_MUTATION), {
+        input: {...validatedFields.data}
+    });
     
-    return ;
+    if (data?.errors) {
+        return {
+            data : Object.fromEntries(formData.entries()),
+            errors : data.errors
+        };
+    }
+    redirect("auth/signin");
+    
+
+  
 }
