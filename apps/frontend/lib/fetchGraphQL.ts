@@ -19,10 +19,11 @@ export const fetchGraphQL = async (
 
     const result = await response.json();
 
-    if (result.errors) {
-      console.error("GraphQL errors:", result.errors);
-      throw new Error(result.errors[0].message);
-    }
+   if (result.errors) {
+  return {
+    errors: result.errors,
+  };
+}
 
     return result.data;
   } catch (error) {

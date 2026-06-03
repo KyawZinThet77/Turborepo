@@ -11,13 +11,17 @@ import { useActionState } from "react";
 
 const SignUpForm = () => {
   const [state,action] = useActionState(signUpAction, undefined)
+
+  console.log("state",state);
+  
   return (
     <form action={action} className="space-y-5">
-      {!!state?.errors && <div className="text-red-500 my-3">{JSON.stringify(state.errors)}</div>}
+      {!!state?.errors && <div className="text-red-500 my-3"> "Something went wrong" </div>}
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
+          name="name"
           type="text"
           placeholder="Enter your name"
           defaultValue={state?.data?.name}
@@ -29,6 +33,7 @@ const SignUpForm = () => {
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
+          name="email"
           type="email"
           placeholder="Enter your email"
           defaultValue={state?.data?.email}
@@ -40,6 +45,7 @@ const SignUpForm = () => {
         <Label htmlFor="password">Password</Label>
         <Input
           id="password"
+          name="password"
           type="password"
           placeholder="Create password"
           defaultValue={state?.data?.password}

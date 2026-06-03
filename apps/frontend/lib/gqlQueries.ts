@@ -34,11 +34,11 @@ export const GET_POSTS_ByID = gql`
       }
     }
   }
-`;
+`; 
 
 export const CREATE_USER_MUTATION = gql`
   mutation createUser($input: CreateUserInput!) {
-    createUser(input: $input) {
+    CreateUser(createUserInput: $input) {
       id
     }
   }

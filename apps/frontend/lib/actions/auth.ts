@@ -8,7 +8,6 @@ import { SignUpSchema } from "../zodSchemas/SignUpSchema";
 import { print } from "graphql";
 
 export const signUpAction = async (state: SignUpFormState | undefined,formData: FormData ) : Promise<SignUpFormState> => {
-
     const validatedFields = SignUpSchema.safeParse(
         Object.fromEntries(formData.entries())
     );
@@ -30,7 +29,7 @@ export const signUpAction = async (state: SignUpFormState | undefined,formData: 
             errors : data.errors
         };
     }
-    redirect("auth/signin");
+    redirect("/auth/signin");
     
 
   
