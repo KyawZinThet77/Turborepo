@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -7,18 +7,23 @@ import { hash } from 'argon2';
 @Injectable()
 export class UserService {
   constructor(private prisma:PrismaService) {}
-  async create(createUserInput: CreateUserInput) {
-    const {password,...rest} = createUserInput;
+ async create(createUserInput: CreateUserInput) {
+  try {
+    const { password, ...rest } = createUserInput;
     const hashedPassword = await hash(password);
-    return this.prisma.user.create({
-      data:{
-        
-        password:hashedPassword,
-        ...rest
-      
-      }
-    })
+
+    return await this.prisma.user.create({
+      data: {
+        password: hashedPassword,
+        ...rest,
+      },
+    });
+  } catch (error) {
+  
+
+    throw new ConflictException('Something went wrong');;
   }
+}
 
   findAll() {
     return `This action returns all user`;
