@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SubmitButton from "@/components/ui/SubmitButton";
-import { signUpAction } from "@/lib/actions/auth";
+import { signInAction, signUpAction } from "@/lib/actions/auth";
 import { useActionState } from "react";
 
 const SignInForm = () => {
-  const [state,action] = useActionState(signUpAction, undefined)
+  
+  const [state,action] = useActionState(signInAction, undefined)
+  console.log("state",state);
   return (
     <form action={action} className="space-y-5">
        {!!state?.errors && <div className="text-red-500 my-3"> "Something went wrong" </div>}

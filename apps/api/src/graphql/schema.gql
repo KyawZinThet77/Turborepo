@@ -50,6 +50,7 @@ type Post {
 type AuthPayload {
   id: Float!
   name: String!
+  email: String!
   avatar: String
   accessToken: String!
 }

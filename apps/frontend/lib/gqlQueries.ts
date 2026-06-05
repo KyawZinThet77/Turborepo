@@ -45,8 +45,8 @@ export const CREATE_USER_MUTATION = gql`
 `;
 
 export const GET_USER_MUTATION = gql`
-  mutation signIn($input: SignInInput!) {
-    SignIn(signInInput: $input) {
+  mutation SignIn($input: SignInInput!) {
+    signIn(signInInput: $input) {
       id
       name
       email
