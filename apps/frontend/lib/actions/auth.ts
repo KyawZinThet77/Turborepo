@@ -7,6 +7,7 @@ import { SignUpFormState } from "../types/formState";
 import { SignUpSchema,SignInSchema } from "../zodSchemas/SignUpSchema";
 import { print } from "graphql";
 import { revalidatePath } from "next/cache";
+import { createSession } from "../session";
 
 export const signUpAction = async (state: SignUpFormState | undefined,formData: FormData ) : Promise<SignUpFormState> => {
     const validatedFields = SignUpSchema.safeParse(
@@ -61,6 +62,17 @@ export const signInAction = async (state: SignUpFormState | undefined,formData: 
             errors : data.errors
         };
     }
+
+    await createSession(
+        {
+            user : {
+                name :  data?.signIn.name,
+                email :     data?.signIn.id,
+                avatar :    data?.signIn.avatar
+            },
+            accessToken : data.data?.accessToken
+        }
+    )
     revalidatePath("/")
     redirect("/");
     
