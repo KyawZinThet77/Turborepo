@@ -4,6 +4,7 @@ export const fetchGraphQL = async (
   query:  string,
   variables = {}
 ) => {
+  console.log("fetching data with query:", query, "and variables:", variables);
   try {
     const response = await fetch(`${BACKEND_URL}/graphql`, {
       method: "POST",
