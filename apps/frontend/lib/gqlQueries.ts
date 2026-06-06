@@ -49,7 +49,6 @@ export const GET_USER_MUTATION = gql`
     signIn(signInInput: $input) {
       id
       name
-      email
       avatar
       accessToken
     }

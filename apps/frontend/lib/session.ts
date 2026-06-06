@@ -53,3 +53,7 @@ export async function getSession() {
         return null;
     }
 }
+
+export async function clearSession() {
+   await (await cookies()).delete("session" );
+}

@@ -15,11 +15,4 @@ export class UserResolver {
     return await this.userService.create(createUserInput);
 
 }
-
-@Mutation(() => AuthPayload)
-async signIn(
-  @Args('signInInput') signInInput: SignInInput,
-) {
-  return this.authService.login(signInInput);
-}
 }

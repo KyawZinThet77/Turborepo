@@ -8,7 +8,7 @@ export class User {
   id!: number;
 
   @Field()
-  name!: string;
+  name?: string;
 
   @Field()
   email!: string; 
