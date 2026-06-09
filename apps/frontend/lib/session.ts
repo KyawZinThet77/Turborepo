@@ -18,6 +18,7 @@ const secretKey = process.env.NEXT_PUBLIC_JWT_SECRET_KEY!
 const encodedKey = new TextEncoder().encode(secretKey);
 
 export async function createSession(payload: Session) {
+    
  const session = await new SignJWT(payload)
   .setProtectedHeader({ alg: "HS256" }).setIssuedAt()
   .setExpirationTime("7d")

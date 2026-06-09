@@ -67,7 +67,7 @@ export const signInAction = async (state: SignUpFormState | undefined,formData: 
         {
             user : {
                 name :  data?.signIn.name,
-                email :     data?.signIn.id,
+                email :     data?.signIn.email,
                 avatar :    data?.signIn.avatar
             },
             accessToken : data.data?.accessToken
