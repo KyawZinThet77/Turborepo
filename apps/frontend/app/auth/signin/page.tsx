@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SubmitButton from "@/components/ui/SubmitButton";
 import { signInAction, signUpAction } from "@/lib/actions/auth";
+import { BACKEND_URL } from "@/lib/constants";
 import { useActionState } from "react";
 
 const SignInForm = () => {
@@ -44,6 +45,9 @@ const SignInForm = () => {
         Sign In
       </Button> */}
       <SubmitButton className="w-full"> Sign In</SubmitButton>
+      <Button>
+        <a href={`${BACKEND_URL}/auth/google/login`}>Sign In With Google</a>
+      </Button>
     </form>
   );
 };
