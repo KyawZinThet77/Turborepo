@@ -13,7 +13,7 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   @Get('google/callback')
   async googleCallback(@Request() req, @Res() res) {
-    const userData = await this.authService.login(req);
+    const userData = await this.authService.login(req.user);
     res.redirect(
       `http://localhost:3000/api/auth/google/callback?userId=${userData.id}&name=${userData.name}&avatar=${userData.avatar}&accessToken=${userData.accessToken}`,
     );
