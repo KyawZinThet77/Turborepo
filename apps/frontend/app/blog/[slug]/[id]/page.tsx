@@ -48,10 +48,10 @@ const PostPage = async ({params }: Props) => {
         </div>
 
         {/* Comment Section */}
-        {/* <div className="border-t p-8">
+        <div className="border-t p-8">
           <h2 className="text-2xl font-semibold mb-6">
-            Comments ({post.comments.length})
-          </h2> */}
+            Comments 
+          </h2> </div>
 
           {/* Comment Form */}
           {/* <form className="mb-8">
