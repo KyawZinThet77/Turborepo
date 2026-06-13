@@ -1,5 +1,5 @@
-import { User } from "@/lib/types/modelTypes";
-import { UserIcon } from "lucide-react";
+"use client";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 import * as Avatar from "@radix-ui/react-avatar";
 import * as Popover from "@radix-ui/react-popover";
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function Profile({ user }: Props) {
-    
+    console.log("user",user);
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
@@ -23,7 +23,7 @@ export default function Profile({ user }: Props) {
               src={user?.avatar || "/default-avatar.png"}
               alt={`${user?.name || "User"}'s avatar`}
               className="w-8 h-8 rounded-full cursor-pointer"
-            />
+            /> 
             <Avatar.Fallback className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
            
                 <UserIcon className="w-4 h-4 text-gray-600 cursor-pointer" />

@@ -6,10 +6,13 @@ import Profile from "../profile";
 type Props = {};
 const Navbar = async (props: Props) => {
   const session = await getSession();
+
+  console.log('session.user',session?.user);
+  
   
   return (
     <>
-      <h1 className="p-3 text-2xl font-bold tracking-tight text-white">
+      <h1 className="p-3 text-2xl font-bold tracking-tight ff text-white">
         Puzzle Blog
       </h1>
 

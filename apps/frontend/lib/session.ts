@@ -3,8 +3,9 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers"
 
 export type userType ={
+    id? : number,
     name? : string,
-    email : string,
+    email? : string,
     avatar? : string    
 }
 

@@ -51,4 +51,27 @@ export class AuthService {
      return currentUser;
     }
 
+    async validateGoogleUser(profile: any) {
+      const user = await this.prisma.user.findUnique({
+        where: { email: profile.email },
+      });
+
+      if (user) {
+        const {password , ...result} = user;
+        return result;
+      }
+
+      const newUser = await this.prisma.user.create({
+        data: {
+         ...profile,
+        },
+      });
+
+      if (newUser) {
+        const {password , ...result} = newUser;
+        return result;
+      }
+      return ;
+      }
+
 }
