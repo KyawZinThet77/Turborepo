@@ -6,8 +6,6 @@ import Profile from "../profile";
 type Props = {};
 const Navbar = async (props: Props) => {
   const session = await getSession();
-
-  console.log('session.user',session?.user);
   
   
   return (

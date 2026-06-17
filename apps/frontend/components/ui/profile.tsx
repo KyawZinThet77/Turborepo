@@ -13,7 +13,6 @@ type Props = {
 };
 
 export default function Profile({ user }: Props) {
-    console.log("user",user);
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
