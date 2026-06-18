@@ -17,12 +17,12 @@ export class CommentService {
 
   async getPostComments({
     postId,
-    skip = 0,
     take = DEFAULT_POSTS_PER_PAGE,
+    skip = 0,
   }: {
     postId: number;
-    skip?: number;
     take?: number;
+    skip?: number;
   }) {
     return await this.prisma.comment.findMany({
       where: { postId },
@@ -33,7 +33,7 @@ export class CommentService {
     });
   }
 
-  async count (postId: number) {
+  async count(postId: number) {
     return await this.prisma.comment.count({ where: { postId } });
   }
 }

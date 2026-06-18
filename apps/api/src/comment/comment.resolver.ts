@@ -24,6 +24,8 @@ export class CommentResolver {
     }) skip : number
    
   ) {
+    console.log('skip',skip);
+    
     return this.commentService.getPostComments({postId, take, skip});
   }
 

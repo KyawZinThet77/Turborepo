@@ -7,6 +7,8 @@ export function transformTakeSkip({
   page?: number;
   perPage?: number;
 }) {
+  console.log('page per page', page , perPage);
+  
   return {
     skip:
       page && perPage

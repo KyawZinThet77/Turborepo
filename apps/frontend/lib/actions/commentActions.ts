@@ -10,6 +10,7 @@ import { gql } from "graphql-tag";
 
 export const fetchComments = async ({page, perPage,postId}: {page?: any, perPage?: any, postId:number}) => {
   
+  
   const { skip, take } = transformTakeSkip({page, perPage});
   const data = await fetchGraphQL(print(GET_POST_COMMENTS),{
     postId,

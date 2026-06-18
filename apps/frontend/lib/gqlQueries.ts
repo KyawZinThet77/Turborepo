@@ -56,7 +56,7 @@ export const GET_USER_MUTATION = gql`
 `;
 
 export const GET_POST_COMMENTS = gql`
- query getPostComments( $postId: Int,  $take: Float,$skip: Float) {
+ query getPostComments( $postId: Int!,  $take: Int,$skip: Int) {
    getPostComments(postId :$postId , take: $take, skip: $skip) {
      id
      content

@@ -14,8 +14,8 @@ const Comments = ({ postId }: Props) => {
     queryKey: ["GET_POST_COMMENTS", postId],
     queryFn: async () => {
       return await fetchComments({
-        page: page * DEFAULT_POSTS_PER_PAGE,
-        perPage: DEFAULT_POSTS_PER_PAGE,
+        page: page,
+        perPage: page * DEFAULT_POSTS_PER_PAGE,
         postId,
       });
     },
@@ -23,7 +23,11 @@ const Comments = ({ postId }: Props) => {
 
   console.log("data from frontend", data);
 
-  return <div className="relative"></div>;
+  return <div className="relative"> {data ? data.getPostCommentCount : "No comments"} <div>
+    {data?.getPostComments?.map((comment: any) => (
+      <div>{comment.content}</div>
+    ))}
+    </div></div>;
 };
 
 export default Comments;
