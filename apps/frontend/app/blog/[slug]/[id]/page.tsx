@@ -51,7 +51,7 @@ const PostPage = async ({params }: Props) => {
         {/* Comment Section */}
         <div className="border-t p-8">
           <h2 className="text-2xl font-semibold mb-6">
-            Comments <Comments postId={post.id} />
+            <Comments postId={post.id} />
           </h2> </div>
 
           {/* Comment Form */}
