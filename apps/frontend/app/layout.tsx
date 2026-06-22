@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -5,15 +6,17 @@ import "./globals.css";
 import NavbarContainer from "@/components/ui/navbarContainer";
 import Navbar from "../components/ui/desktop/navbar";
 import Providers from "./providers";
+import "./globals.css";
+import { Poppins } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const geistSans = Geist({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // optional
 });
 
 export const metadata: Metadata = {
@@ -29,7 +32,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${poppins.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Providers>

@@ -44,7 +44,6 @@ export class CommentResolver {
     @Args('createCommentInput') createCommentInput: CreateCommentInput,
   ) {
     const authorId = Ctx.req.user.id ; 
-    console.log("authorid", authorId);
     
     return this.commentService.create(createCommentInput,authorId);
   }
