@@ -17,7 +17,7 @@ type CommentEntity {
   id: Int!
   content: String!
   post: Post!
-  author: User!
+  author: User
   createdAt: DateTime!
   updatedAt: DateTime!
 }

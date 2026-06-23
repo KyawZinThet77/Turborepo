@@ -1,14 +1,26 @@
 "use client";
 
 import { createComments } from "@/lib/actions/commentActions";
-import { useActionState } from "react";
-
+import { useActionState, useEffect } from "react";
+ import { toast } from "sonner"
 type Props = {
   postId: number;
 };
 
 const CommentForm = ({ postId }: Props) => {
   const [state, action] = useActionState(createComments, undefined);
+  console.log('state',state);
+  
+useEffect(() => {
+    if (!state) return;
+
+    if (state.ok) {
+      toast.success(state.message || "Action successful!")
+    } 
+    else if (state.ok === false) {
+      toast.error(state.message || "Something went wrong.")
+    }
+  }, [state])
   return (
     <form action={action} className="p-8">
         <input name="postId" type="hidden" value={postId ?? ""} readOnly />

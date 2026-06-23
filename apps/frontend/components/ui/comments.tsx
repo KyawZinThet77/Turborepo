@@ -22,7 +22,6 @@ const Comments = ({ postId }: Props) => {
     },
   });
 
-  console.log("data from frontend", data);
 if (isLoading) {
     return <CommentSkeleton />;
   }
