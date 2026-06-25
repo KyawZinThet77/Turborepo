@@ -7,9 +7,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class CommentService {
   constructor(private prisma: PrismaService) {}
-  create(createCommentInput: CreateCommentInput) {
-    return 'This action adds a new comment';
-  }
 
   findAll() {
     return `This action returns all comment`;
@@ -35,5 +32,21 @@ export class CommentService {
 
   async count(postId: number) {
     return await this.prisma.comment.count({ where: { postId } });
+  }
+
+  async create(createCommentInput: CreateCommentInput, authorId: number) {
+    return await this.prisma.comment.create({
+      data: {
+        content: createCommentInput.content,
+        post: {
+          connect: {
+            id: createCommentInput.postId,
+          },
+        },
+        author: {
+          connect: { id:  authorId  },
+        },
+      },
+    });
   }
 }

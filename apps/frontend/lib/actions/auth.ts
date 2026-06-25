@@ -24,10 +24,7 @@ export const signUpAction = async (state: SignUpFormState | undefined,formData: 
     const data = await fetchGraphQL(print(CREATE_USER_MUTATION), {
         input: {...validatedFields.data}
     });
-
-    console.log("data?.errors",data?.errors);
-    
-    
+      
     if (data?.errors) {
         return {
             data : Object.fromEntries(formData.entries()),

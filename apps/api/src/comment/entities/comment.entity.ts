@@ -13,8 +13,8 @@ export class CommentEntity {
   @Field(() => Post)
   post!: Post;
 
-  @Field(() => User)
-  author!: User;
+  @Field(() => User , { nullable: true })
+  author?: User;
 
   @Field()
   createdAt!: Date;
