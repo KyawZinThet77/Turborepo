@@ -2,28 +2,32 @@
 
 import { createComments } from "@/lib/actions/commentActions";
 import { useActionState, useEffect } from "react";
- import { toast } from "sonner"
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
+
 type Props = {
   postId: number;
 };
 
 const CommentForm = ({ postId }: Props) => {
+  const queryClient = useQueryClient();
   const [state, action] = useActionState(createComments, undefined);
-  console.log('state',state);
-  
-useEffect(() => {
+
+  useEffect(() => {
     if (!state) return;
 
     if (state.ok) {
-      toast.success(state.message || "Action successful!")
-    } 
-    else if (state.ok === false) {
-      toast.error(state.message || "Something went wrong.")
+      toast.success(state.message || "Action successful!");
+      queryClient.invalidateQueries({
+      queryKey: ["GET_POST_COMMENTS", postId],
+    });
+    } else if (state.ok === false) {
+      toast.error(state.message || "Something went wrong.");
     }
-  }, [state])
+  }, [state]);
   return (
     <form action={action} className="p-8">
-        <input name="postId" type="hidden" value={postId ?? ""} readOnly />
+      <input name="postId" type="hidden" value={postId ?? ""} readOnly />
       <textarea
         name="content"
         placeholder="Write a comment..."

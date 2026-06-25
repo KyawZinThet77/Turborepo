@@ -15,7 +15,6 @@ const PostPage = async ({params }: Props) => {
     const postId = (await params).id;
     const post = await fetchPostById(+postId);
 
-
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">

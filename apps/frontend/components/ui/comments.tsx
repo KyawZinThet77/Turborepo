@@ -11,7 +11,7 @@ type Props = {
 };
 const Comments = ({ postId }: Props) => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["GET_POST_COMMENTS", postId],
     queryFn: async () => {
       return await fetchComments({
