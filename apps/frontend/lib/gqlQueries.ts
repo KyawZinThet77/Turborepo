@@ -22,11 +22,9 @@ export const GET_POSTS_ByID = gql`
       thumbnail
       content
       createdAt
-     
+
       author {
-        
         name
-       
       }
       tags {
         id
@@ -34,7 +32,7 @@ export const GET_POSTS_ByID = gql`
       }
     }
   }
-`; 
+`;
 
 export const CREATE_USER_MUTATION = gql`
   mutation createUser($input: CreateUserInput!) {
@@ -56,29 +54,37 @@ export const GET_USER_MUTATION = gql`
 `;
 
 export const GET_POST_COMMENTS = gql`
- query getPostComments( $postId: Int!,  $take: Int,$skip: Int) {
-   getPostComments(postId :$postId , take: $take, skip: $skip) {
-     id
-     content
-     createdAt
-     author{
-     name
-     avatar
-     }
-   }
-     getPostCommentCount(postId :$postId)
- }`
+  query getPostComments($postId: Int!, $take: Int, $skip: Int) {
+    getPostComments(postId: $postId, take: $take, skip: $skip) {
+      id
+      content
+      createdAt
+      author {
+        name
+        avatar
+      }
+    }
+    getPostCommentCount(postId: $postId)
+  }
+`;
 
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($input: CreateCommentInput!) {
+    createComment(createCommentInput: $input) {
+      id
+      content
+      createdAt
+      author {
+        name
+        avatar
+      }
+    }
+  }
+`;
 
- export const CREATE_COMMENT_MUTATION = gql`
- mutation createComment($input: CreateCommentInput!) {
-   createComment(createCommentInput: $input) {
-     id
-     content
-     createdAt
-     author{
-     name
-     avatar
-     }
-   }
- }`
+export const GET_POST_LIKES = gql`
+  query PostLikeData($postId: Int!) {
+    getPostLikes(postId: $postId)
+    likeCountperPost(postId: $postId)
+  }
+`;

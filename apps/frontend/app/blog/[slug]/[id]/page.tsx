@@ -1,6 +1,7 @@
 
 import CommentForm from "@/components/ui/commentForm";
 import Comments from "@/components/ui/comments";
+import Like from "@/components/ui/like";
 import { createComments } from "@/lib/actions/commentActions";
 import { fetchPostById } from "@/lib/actions/postActions";
 import { getSession } from "@/lib/session";
@@ -50,6 +51,7 @@ const PostPage = async ({params }: Props) => {
           </div>
         </div>
 
+        <Like userId={session?.user.id} postId={post.id} />
             {/* Comment Form */}
           {!!session?.user && (
             <CommentForm postId={post.id}/>
