@@ -22,7 +22,8 @@ export async function GET(res:NextResponse){
     })
 
     if (tokenRes.status === 401) throw new Error("Google authentication failed");
-
+    console.log('accessTokenaccessToken',accessToken);
+    
     await createSession({
         user : {
             id : Number(userId),

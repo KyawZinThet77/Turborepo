@@ -2,31 +2,26 @@
 
 import { print } from "graphql";
 import { authFetchQl, fetchGraphQL } from "../fetchGraphQL";
-import { CREATE_COMMENT_MUTATION, GET_POST_COMMENTS } from "../gqlQueries";
+import {
+  CREATE_COMMENT_MUTATION,
+  GET_POST_COMMENTS,
+  GET_POST_LIKES,
+} from "../gqlQueries";
 import { CommentEntity, Post } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
 import { CreateCommentFormState } from "../types/formState";
 import { CommentFormSchema } from "../zodSchemas/CommentFormSchema";
 
-
-
-
-
-export const GetPostLikeData = async (
-) => {
-
+export const GetPostLikeData = async (postId: number) => {
   const data = await authFetchQl(print(GET_POST_LIKES), {
-    input: {  },
+    postId,
   });
 
-  if (data?.errors) {
-    return {
-   
-    };
-  }
-  return {
-    ok: true,
-    message: "Comment created successfully",
-  };
+  console.log("data like file ",data);
+
+return {
+  likecount: data?.likeCountperPost as number,  
+  isLiked: data?.isUserLiked as boolean,
+};
 };

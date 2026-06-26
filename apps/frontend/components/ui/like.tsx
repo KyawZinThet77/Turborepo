@@ -1,6 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { GetPostLikeData } from "@/lib/actions/likeActions";
+import { useQuery } from "@tanstack/react-query";
+import { HeartIcon } from "lucide-react";
+import { useState } from "react";
 
 interface LikeProps {
   userId?: number;
@@ -8,27 +11,24 @@ interface LikeProps {
 }
 
 export default function Like({ userId, postId }: LikeProps) {
-  const [liked, setLiked] = useState(false);
+  const { data } = useQuery({
+    queryKey: ["like", postId],
+    queryFn: async () => await GetPostLikeData(postId),
+  });
 
-  const handleLike = async () => {
-    if (!userId) return alert('Please log in');
-
-    // Toggle the UI state
-    setLiked(!liked);
-
-    // Send the data to your backend
-    await fetch('/api/like', {
-      method: 'POST',
-      body: JSON.stringify({ postId, userId }),
-    });
-  };
+  
 
   return (
-    <button 
-      onClick={handleLike}
-      style={{ color: liked ? 'red' : 'black', cursor: 'pointer' }}
-    >
-      {liked ? '❤️ Liked' : '🤍 Like'}
-    </button>
+    <div className="">
+      {data?.isLiked ? (
+        <button  className="flex items-center space-x-3" style={{ color: "red", cursor: "pointer" }}>
+          <HeartIcon fill="currentColor" /> <span className="ml-2 font-semibold text-sm text-gray-600">{data?.likecount}</span>
+        </button>
+      ) : (
+        <button  className="flex items-center space-x-3" style={{ color: "black", cursor: "pointer" }}> 
+          <HeartIcon /> <span className="ml-2 font-semibold text-sm text-gray-600">{data?.likecount}</span>
+        </button>
+      )}
+    </div>
   );
 }

@@ -84,7 +84,7 @@ export const CREATE_COMMENT_MUTATION = gql`
 
 export const GET_POST_LIKES = gql`
   query PostLikeData($postId: Int!) {
-    getPostLikes(postId: $postId)
+    isUserLiked(postId: $postId)
     likeCountperPost(postId: $postId)
   }
 `;
