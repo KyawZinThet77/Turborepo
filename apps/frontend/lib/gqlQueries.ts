@@ -88,3 +88,13 @@ export const GET_POST_LIKES = gql`
     likeCountperPost(postId: $postId)
   }
 `;
+export const LIKE_POST_MUTATION = gql`
+  mutation LikePost($postId: Int!) {
+    likePost(postId: $postId)
+  }
+`;
+export const UNLIKE_POST_MUTATION = gql`
+  mutation UnLikePost($postId: Int!) {
+    unLikePost(postId: $postId)
+  }
+`;

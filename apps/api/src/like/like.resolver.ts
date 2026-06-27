@@ -10,14 +10,14 @@ export class LikeResolver {
 
   @UseGuards(JwtAuthGuard)
   @Mutation(() => Boolean)
-   async likePost(@Context() Ctx ,@Args('postId', {type :() => Int!}) postId: number) {
+   async likePost(@Context() Ctx ,@Args('postId', {type :() => Int}) postId: number) {
     const userId = Ctx.req.user.id;
     return await this.likeService.create({postId, userId});
   }
 
     @UseGuards(JwtAuthGuard)
   @Mutation(() => Boolean)
-   async unLikePost(@Context() Ctx ,@Args('postId', {type :() => Int!}) postId: number) {
+   async unLikePost(@Context() Ctx ,@Args('postId', {type :() => Int}) postId: number) {
     const userId = Ctx.req.user.id;
     return await this.likeService.delete({postId, userId});
   }
