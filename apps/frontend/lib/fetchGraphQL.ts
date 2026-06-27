@@ -33,13 +33,14 @@ export const authFetchQl = async (query: string, variables = {}) => {
   const session = await getSession();
   const headers: HeadersInit = {
     "Content-Type": "application/json",
-    Authorization : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJpYXQiOjE3ODIyMjkyMDQsImV4cCI6MTc4MjMxNTYwNH0.KJ12Gqg9Zez9U3k0C5806NAO_G1CvX78zm6OEfdDifA`,
   };
 
-  // if (session?.accessToken) {
-  //   headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJpYXQiOjE3ODIyMjkyMDQsImV4cCI6MTc4MjMxNTYwNH0.KJ12Gqg9Zez9U3k0C5806NAO_G1CvX78zm6OEfdDifA`;
-  // }
-console.log("headers",headers);
+  console.log('session?.accessToken',session);
+  
+
+  if (session?.accessToken) {
+    headers["Authorization"] = `Bearer ${session.accessToken}`;
+  }
 
   try {
     const response = await fetch(`${BACKEND_URL}/graphql`, {
@@ -58,9 +59,6 @@ console.log("headers",headers);
         errors: result.errors,
       };
     }
-
-  
-    
 
     return result.data;
   } catch (error) {

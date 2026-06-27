@@ -26,7 +26,7 @@ const CommentForm = ({ postId }: Props) => {
     }
   }, [state]);
   return (
-    <form action={action} className="p-8">
+    <form action={action} className="">
       <input name="postId" type="hidden" value={postId ?? ""} readOnly />
       <textarea
         name="content"
