@@ -48,23 +48,4 @@ export class CommentResolver {
     return this.commentService.create(createCommentInput,authorId);
   }
 
-  // @Query(() => [CommentEntity], { name: 'comment' })
-  // findAll() {
-  //   return this.commentService.findAll();
-  // }
-
-  // @Query(() => CommentEntity, { name: 'comment' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.commentService.findOne(id);
-  // }
-
-  // @Mutation(() => CommentEntity)
-  // updateComment(@Args('updateCommentInput') updateCommentInput: UpdateCommentInput) {
-  //   return this.commentService.update(updateCommentInput.id, updateCommentInput);
-  // }
-
-  // @Mutation(() => CommentEntity)
-  // removeComment(@Args('id', { type: () => Int }) id: number) {
-  //   return this.commentService.remove(id);
-  // }
 }

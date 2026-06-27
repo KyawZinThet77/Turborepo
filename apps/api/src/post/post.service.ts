@@ -21,23 +21,48 @@ export class PostService {
     return await this.prisma.post.findMany({ skip, take });
   }
 
-  async count(){
+  async count() {
     return await this.prisma.post.count();
   }
 
-    async findOne(id : number) {
-    return await this.prisma.post.findUnique({ where: { id }, include: { author: true, tags:true } });
+  async findOne(id: number) {
+    return await this.prisma.post.findUnique({
+      where: { id },
+      include: { author: true, tags: true },
+    });
+  }
+  findByUser({
+    skip = 0,
+    take = DEFAULT_POSTS_PER_PAGE,
+    userId,
+  }: {
+    skip?: number;
+    take?: number;
+    userId: number;
+  }) {
+    return this.prisma.post.findMany({
+      where: { author: { id: userId } },
+      select: {
+        id: true,
+        content: true,
+        createdAt: true,
+        published: true,
+        slug: true,
+        title: true,
+        thumbnail: true,
+        _count: {
+          select: {
+            comments: true,
+            likes: true,
+          },
+        },
+      },
+      skip,
+      take,
+    });
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} post`;
-  // }
-
-  // update(id: number, updatePostInput: UpdatePostInput) {
-  //   return `This action updates a #${id} post`;
-  // }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} post`;
-  // }
+  async countByUser(userId: number) {
+    return await this.prisma.post.count({ where: { author: { id: userId } } });
+  }
 }

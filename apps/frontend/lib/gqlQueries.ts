@@ -14,6 +14,23 @@ export const GET_POSTS = gql`
   }
 `;
 
+export const GET_POSTS_BY_USER = gql`
+  query PostsByUser( $skip: Float, $take: Float) {
+    getPostsByUser( skip: $skip, take: $take) {
+        id
+        content
+        createdAt
+        published
+        slug
+        title
+        thumbnail
+        _count {
+            comments
+            likes }
+    userPostCount
+  }
+`;
+
 export const GET_POSTS_ByID = gql`
   query getPostById($id: Int!) {
     findOne(id: $id) {
