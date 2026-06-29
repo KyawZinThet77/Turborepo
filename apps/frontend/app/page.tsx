@@ -18,11 +18,12 @@ export default async function Home({ searchParams }: Props) {
   const page =
     typeof params.page === "string"
       ? Number(params.page)
-      : undefined;
+      : 1;
 
   const { posts, totalPosts } = await fetchPosts({
     page,
   });
+  
 
 
   return (

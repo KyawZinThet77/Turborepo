@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useRef, useState } from "react";
+import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{}>;
 const PostsLayout = ({ children }: Props) => {

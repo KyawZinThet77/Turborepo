@@ -34,8 +34,6 @@ export const authFetchQl = async (query: string, variables = {}) => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
   };
-
-  console.log('session?.accessToken',session);
   
 
   if (session?.accessToken) {

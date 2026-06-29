@@ -16,6 +16,7 @@ export const fetchPosts = async ({page, perPage}: {page?: any, perPage?: any}) =
     skip,
     take
   });
+
   return {posts : data.posts as Post[], totalPosts :data.postCount as number};
 };
 
@@ -24,7 +25,7 @@ export const fetchPostById= async (id: number) => {
   return data.findOne as Post;
 }
 
-export const fetchPostsByUser = async ({page, perPage, userId}: {page?: any, perPage?: any, userId: number}) => {
+export const fetchPostsByUser = async ({page, perPage}: {page?: any, perPage?: any}) => {
   const { skip, take } = transformTakeSkip({page, perPage});
 
 

@@ -41,7 +41,7 @@ export class PostResolver {
   }
 
    @UseGuards(JwtAuthGuard)
-  @Query(() => [Post], { name: 'posts' })
+  @Query(() => [Post], { name: 'getPostsByUser' })
   getPostsByUser(
     @Context() context,
     @Args('skip', { type: () => Float, nullable: true }) skip?: number,
