@@ -1,4 +1,4 @@
-import PostsLayout from "./layout";
+import PostsLayout from "../layout";
 import { fetchPostsByUser } from "@/lib/actions/postActions";
 import { DEFAULT_POSTS_PER_PAGE } from "@/lib/constants";
 import EmptyState from "@/components/ui/emptyStage";
