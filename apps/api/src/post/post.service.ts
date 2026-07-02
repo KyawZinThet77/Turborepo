@@ -6,9 +6,6 @@ import { DEFAULT_POSTS_PER_PAGE } from 'src/constants';
 
 @Injectable()
 export class PostService {
-  // create(createPostInput: CreatePostInput) {
-  //   return 'This action adds a new post';
-  // }
   constructor(private prisma: PrismaService) {}
 
   async findAll({
@@ -64,5 +61,22 @@ export class PostService {
 
   async countByUser(userId: number) {
     return await this.prisma.post.count({ where: { author: { id: userId } } });
+  }
+
+  async create({createPostInput, userId}: {createPostInput: CreatePostInput, userId: number}) {
+   return await this.prisma.post.create({
+      data: {
+        ...createPostInput,
+        author: {
+          connect: { id: userId },
+        },
+        tags: {
+          connectOrCreate: createPostInput.tags.map((tag) => ({
+            where: { name: tag },
+            create: { name: tag },
+          })),
+        },
+      },
+    });
   }
 }

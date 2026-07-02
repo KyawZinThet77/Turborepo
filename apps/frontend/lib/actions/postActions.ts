@@ -6,6 +6,8 @@ import { GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
+import { PostCreateFormState } from "../types/formState";
+import { PostCreateSchema } from "../zodSchemas/PostCreateFormSchema";
 
 
 export const fetchPosts = async ({page, perPage}: {page?: any, perPage?: any}) => {
@@ -34,4 +36,32 @@ export const fetchPostsByUser = async ({page, perPage}: {page?: any, perPage?: a
     take,
   });
   return {posts : data.getPostsByUser as Post[], totalPosts :data.userPostCount as number};
+};
+
+export const PostCreateAction = async (
+  state: PostCreateFormState | undefined,
+  formData: FormData,
+): Promise<PostCreateFormState> => {
+  const validatedFields = PostCreateSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+
+  if (!validatedFields.success) {
+    return {
+      data: Object.fromEntries(formData.entries()),
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  // const data = await fetchGraphQL(print(CREATE_POST_MUTATION), {
+  //   input: { ...validatedFields.data },
+  // });
+
+  // if (data?.errors) {
+  //   return {
+  //     data: Object.fromEntries(formData.entries()),
+  //     errors: data.errors,
+  //   };
+  // }
+
 };
