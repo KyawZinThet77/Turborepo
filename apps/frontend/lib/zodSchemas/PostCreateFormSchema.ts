@@ -8,8 +8,8 @@ export const PostCreateSchema = z.object({
     .trim(),
 
   tags: z
-    .string()
-    .max(150, "Tags string cannot exceed 150 characters")
+    .array(z.string())
+    .max(10, "You cannot have more than 10 tags")
     .optional(),
 
   content: z

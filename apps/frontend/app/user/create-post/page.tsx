@@ -1,5 +1,6 @@
 "use client";
 
+import PostFormContainer from "@/components/ui/postFormContainer";
 import UpsertPostForm from "@/components/ui/upsertPostForm";
 import React, { useState } from "react";
 
@@ -37,7 +38,7 @@ export default function CreatePostForm({ onSubmit, className = "" }: CreatePostF
           Create a new post !
         </h2>
 
-        <UpsertPostForm />
+       <PostFormContainer/>
 
       </div>
     </div>

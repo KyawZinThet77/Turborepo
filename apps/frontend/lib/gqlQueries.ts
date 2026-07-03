@@ -115,3 +115,12 @@ export const UNLIKE_POST_MUTATION = gql`
     unLikePost(postId: $postId)
   }
 `;
+
+export const CREATE_POST_MUTATION = gql`
+  mutation CreatePost($input: CreatePostInput!) {
+    createPost(createPostInput: $input) {
+      id
+   
+    }
+  }
+`;

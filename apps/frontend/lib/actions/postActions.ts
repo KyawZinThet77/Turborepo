@@ -2,7 +2,7 @@
 
 import { print } from "graphql";
 import {  authFetchQl, fetchGraphQL } from "../fetchGraphQL";
-import { GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID } from "../gqlQueries";
+import { CREATE_POST_MUTATION, GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
@@ -53,15 +53,19 @@ export const PostCreateAction = async (
     };
   }
 
-  // const data = await fetchGraphQL(print(CREATE_POST_MUTATION), {
-  //   input: { ...validatedFields.data },
-  // });
+  const thumbnailUrl = '';
 
-  // if (data?.errors) {
-  //   return {
-  //     data: Object.fromEntries(formData.entries()),
-  //     errors: data.errors,
-  //   };
-  // }
+  const data = await authFetchQl(print(CREATE_POST_MUTATION), {
+    input: { ...validatedFields.data, thumbnail: thumbnailUrl },
+  });
+
+  if (data?.errors) {
+    return {
+      data: Object.fromEntries(formData.entries()),
+      errors: data.errors,
+    };
+  }
+
+  return {message: "Post created successfully", ok: true};
 
 };
