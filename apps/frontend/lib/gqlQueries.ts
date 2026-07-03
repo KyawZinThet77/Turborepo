@@ -27,8 +27,8 @@ export const GET_POSTS_BY_USER = gql`
         _count {
             comments
             likes }
-    userPostCount
-} }
+    
+} userPostCount }
 `;
 
 export const GET_POSTS_ByID = gql`

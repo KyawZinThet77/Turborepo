@@ -12,7 +12,7 @@ const PostFormContainer = ({}: Props) => {
   return (
     <div>
       <UpsertPostForm state={state} formAction={action} />
-    </div>
+    </div> 
   );
 };
 

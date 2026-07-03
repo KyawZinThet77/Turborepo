@@ -1,16 +1,17 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
 import { isNullableType } from 'graphql';
 
 @InputType()
 export class CreatePostInput {
   @IsString()
- @Field(() => String)
+  @Field(() => String)
   title!: string;
 
-  @IsString()
+  @IsArray()
+  @IsString({ each: true })
   @IsOptional()
- @Field(() => String)
+  @Field(() => [String], { nullable: true })
   tags!: string[];
 
   @IsString()
@@ -24,6 +25,5 @@ export class CreatePostInput {
 
   @IsBoolean()
   @Field(() => Boolean, { defaultValue: false })
-  published!: boolean
-  
+  published!: boolean;
 }

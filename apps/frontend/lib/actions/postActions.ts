@@ -54,6 +54,7 @@ export const PostCreateAction = async (
   }
 
   const thumbnailUrl = '';
+  console.log("validatedFields.data", validatedFields.data);
 
   const data = await authFetchQl(print(CREATE_POST_MUTATION), {
     input: { ...validatedFields.data, thumbnail: thumbnailUrl },

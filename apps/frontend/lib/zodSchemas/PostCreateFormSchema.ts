@@ -8,16 +8,19 @@ export const PostCreateSchema = z.object({
     .trim(),
 
   tags: z
-    .array(z.string())
-    .max(10, "You cannot have more than 10 tags")
-    .optional(),
+    .string()
+
+    .refine(
+      (value) => value.split(",").every((tag) => tag.trim() !== ""),
+      "Invalid tags: remove extra commas or blank tags",
+    )
+    .transform((value) => value.split(",").map((tag) => tag.trim())),
 
   content: z
     .string()
     .min(20, "Content body must be at least 20 characters long")
     .max(10000, "Content body cannot exceed 10,000 characters"),
 
-  isPublished: z.string().transform((val: string) => val === "on"),
-
   thumbnail: z.instanceof(File).optional(),
+  published: z.string().optional().transform((value) => value === "on"),
 });

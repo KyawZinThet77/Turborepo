@@ -1,3 +1,4 @@
+"use client";
 import { Post } from "@/lib/types/modelTypes";
 import Image from "next/image";
 import Link from "next/link";

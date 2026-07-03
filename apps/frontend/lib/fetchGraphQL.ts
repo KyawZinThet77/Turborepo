@@ -40,6 +40,8 @@ export const authFetchQl = async (query: string, variables = {}) => {
     headers["Authorization"] = `Bearer ${session.accessToken}`;
   }
 
+  console.log("authFetchQl headers", variables);
+
   try {
     const response = await fetch(`${BACKEND_URL}/graphql`, {
       method: "POST",
