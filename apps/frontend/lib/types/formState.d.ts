@@ -41,11 +41,13 @@ export type CreateCommentFormState =
 
 export type PostCreateFormState = {
   data?: {
+    id?: number;
     title?: string;
     tags?: string;
     content?: string;
     published?: string;
     thumbnail?: File | null;
+    previousThumbnail?: string;
   };
   errors?: {
     title?: string[];

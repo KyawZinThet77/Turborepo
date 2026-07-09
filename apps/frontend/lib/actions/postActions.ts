@@ -2,7 +2,7 @@
 
 import { print } from "graphql";
 import {  authFetchQl, fetchGraphQL } from "../fetchGraphQL";
-import { CREATE_POST_MUTATION, GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID } from "../gqlQueries";
+import { CREATE_POST_MUTATION, GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID, UPDATE_POST_MUTATION } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
@@ -71,5 +71,42 @@ export const PostCreateAction = async (
   }
 
   return {message: "Post created successfully", ok: true};
+
+};
+
+export const PostUpdateAction = async (
+  state: PostCreateFormState | undefined,
+  formData: FormData,
+): Promise<PostCreateFormState> => {
+  const validatedFields = PostCreateSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+
+  if (!validatedFields.success) {
+    return {
+      data: Object.fromEntries(formData.entries()),
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+
+const {thumbnail , ...inputs} = validatedFields.data  
+let thumbnailUrl = ''
+if(thumbnail) {
+    thumbnailUrl = await uploadThumbnail(thumbnail);
+  }
+
+  const data = await authFetchQl(print(UPDATE_POST_MUTATION), {
+    input: { ...inputs, ...(thumbnailUrl && { thumbnail: thumbnailUrl }) },
+  });
+
+  if (data?.errors) {
+    return {
+      data: Object.fromEntries(formData.entries()),
+      errors: data.errors,
+    };
+  }
+
+  return {message: "Post updated successfully", ok: true};
 
 };

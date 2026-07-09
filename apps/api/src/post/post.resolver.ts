@@ -40,7 +40,7 @@ export class PostResolver {
     return this.postService.findOne(id);
   }
 
-   @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Query(() => [Post], { name: 'getPostsByUser' })
   getPostsByUser(
     @Context() context,
@@ -48,22 +48,37 @@ export class PostResolver {
     @Args('take', { type: () => Float, nullable: true }) take?: number,
   ) {
     const userId = context.req.user.id; // Access the authenticated user from the request
-    return this.postService.findByUser({ skip : skip?? 0, take : take ?? DEFAULT_POSTS_PER_PAGE,userId });
+    return this.postService.findByUser({
+      skip: skip ?? 0,
+      take: take ?? DEFAULT_POSTS_PER_PAGE,
+      userId,
+    });
   }
 
   @UseGuards(JwtAuthGuard)
-  @Query(()=> Int)
+  @Query(() => Int)
   userPostCount(@Context() context) {
     const userId = context.req.user.id; // Access the authenticated user from the request
     return this.postService.countByUser(userId);
   }
 
-    @UseGuards(JwtAuthGuard)
-  @Mutation(()=> Post)
-   createPost(@Context() context, @Args('createPostInput') createPostInput: CreatePostInput) {
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Post)
+  createPost(
+    @Context() context,
+    @Args('createPostInput') createPostInput: CreatePostInput,
+  ) {
     const userId = context.req.user.id; // Access the authenticated user from the request
     return this.postService.create({ createPostInput, userId });
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Post)
+  updatePost(
+    @Context() context,
+    @Args('updatePostInput') updatePostInput: UpdatePostInput,
+  ) {
+    const userId = context.req.user.id; // Access the authenticated user from the request
+    return this.postService.update({ updatePostInput, userId });
+  }
 }
-
-

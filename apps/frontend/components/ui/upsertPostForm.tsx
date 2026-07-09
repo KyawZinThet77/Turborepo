@@ -24,6 +24,7 @@ const UpsertPostForm = ({ state, formAction}: Props) => {
   return (
     <section className="relative">
       <form action={formAction} className="space-y-6">
+        <input type="hidden" name="id" defaultValue={state?.data?.id || ""}  />
         {/* Post Title Input */}
         <div className="space-y-2">
           <Label htmlFor="title" className="text-gray-700 dark:text-gray-300">
@@ -43,7 +44,7 @@ const UpsertPostForm = ({ state, formAction}: Props) => {
 
         {/* Published Checkbox */}
         <div className="space-y-2 flex items-start gap-2">
-          <input type="checkbox" id="published" name="published" defaultChecked={state?.data?.published == "true"} />
+          <input type="checkbox" id="published" name="published" defaultChecked={state?.data?.published == "on" ? true : false} />
           <Label
             htmlFor="published"
             className="text-gray-700 dark:text-gray-300"
@@ -89,10 +90,10 @@ const UpsertPostForm = ({ state, formAction}: Props) => {
             }}
             className="w-full cursor-pointer file:text-blue-600 dark:file:text-blue-400 file:mr-2 file:rounded-md file:border-0 "
           />
-          {!!imageUrl && (
+          {(!!imageUrl || !!state?.data?.previousThumbnail) && (
             <div className="mt-2">
               <img
-                src={imageUrl}
+                src={imageUrl || state?.data?.previousThumbnail}
                 alt="Thumbnail Preview"
                 className="w-32 h-32 object-cover rounded-md"
               />

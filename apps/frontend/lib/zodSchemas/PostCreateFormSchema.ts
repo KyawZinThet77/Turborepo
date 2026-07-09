@@ -1,6 +1,10 @@
 import { z } from "zod";
 
 export const PostCreateSchema = z.object({
+  postId: z
+    .string()
+    .transform((value) => parseInt(value))
+    .optional(),
   title: z
     .string()
     .min(5, "Title must be at least 5 characters long")
@@ -22,5 +26,8 @@ export const PostCreateSchema = z.object({
     .max(10000, "Content body cannot exceed 10,000 characters"),
 
   thumbnail: z.instanceof(File).optional(),
-  published: z.string().optional().transform((value) => value === "on"),
+  published: z
+    .string()
+    .optional()
+    .transform((value) => value === "on"),
 });
