@@ -81,4 +81,14 @@ export class PostResolver {
     const userId = context.req.user.id; // Access the authenticated user from the request
     return this.postService.update({ updatePostInput, userId });
   }
+
+    @UseGuards(JwtAuthGuard)
+  @Mutation(() => Post)
+  deletePost(
+    @Context() context,
+    @Args('postId') postId: number,
+  ) {
+    const userId = context.req.user.id; // Access the authenticated user from the request
+    return this.postService.delete({ postId, userId });
+  }
 }

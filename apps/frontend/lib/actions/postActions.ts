@@ -2,7 +2,7 @@
 
 import { print } from "graphql";
 import {  authFetchQl, fetchGraphQL } from "../fetchGraphQL";
-import { CREATE_POST_MUTATION, GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID, UPDATE_POST_MUTATION } from "../gqlQueries";
+import { CREATE_POST_MUTATION, DELETE_POST_MUTATION, GET_POSTS, GET_POSTS_BY_USER, GET_POSTS_ByID, UPDATE_POST_MUTATION } from "../gqlQueries";
 import {Post  } from "../types/modelTypes";
 import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
@@ -109,4 +109,11 @@ if(thumbnail) {
 
   return {message: "Post updated successfully", ok: true};
 
+};
+
+export const PostDeleteAction = async (postId: number) => {
+  const data = await authFetchQl(print(DELETE_POST_MUTATION), {
+    input: {  postId },
+  });
+  return data.deletePost as any;
 };
