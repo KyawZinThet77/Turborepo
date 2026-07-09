@@ -1,24 +1,28 @@
-export type SignUpFormState = {
-  data?: {
-    name?: string;
-    email?: string;
-    password?: string;
-  }
-  errors: {
-    name?: string[];
-    email?: string[];
-    password?: string[];
-  }
-  message?: string;
-} | undefined;
+export type SignUpFormState =
+  | {
+      data?: {
+        name?: string;
+        email?: string;
+        password?: string;
+      };
+      errors: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
 
-export type SignInFormState = {
-  errors: {
-    email?: string[];
-    password?: string[];
-  }
-  message?: string;
-} | undefined;
+export type SignInFormState =
+  | {
+      errors: {
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
 
 export type CreateCommentFormState =
   | {
@@ -34,3 +38,22 @@ export type CreateCommentFormState =
       open?: boolean;
     }
   | undefined;
+
+export type PostCreateFormState = {
+  data?: {
+    title?: string;
+    tags?: string;
+    content?: string;
+    published?: string;
+    thumbnail?: File | null;
+  };
+  errors?: {
+    title?: string[];
+    tags?: string[];
+    content?: string[];
+    published?: string[];
+    thumbnail?: string[];
+  };
+  message?: string;
+  ok?: boolean;
+} | undefined;

@@ -14,6 +14,23 @@ export const GET_POSTS = gql`
   }
 `;
 
+export const GET_POSTS_BY_USER = gql`
+  query PostsByUser( $skip: Float, $take: Float) {
+    getPostsByUser( skip: $skip, take: $take) {
+        id
+        content
+        createdAt
+        published
+        slug
+        title
+        thumbnail
+        _count {
+            comments
+            likes }
+    
+} userPostCount }
+`;
+
 export const GET_POSTS_ByID = gql`
   query getPostById($id: Int!) {
     findOne(id: $id) {
@@ -96,5 +113,14 @@ export const LIKE_POST_MUTATION = gql`
 export const UNLIKE_POST_MUTATION = gql`
   mutation UnLikePost($postId: Int!) {
     unLikePost(postId: $postId)
+  }
+`;
+
+export const CREATE_POST_MUTATION = gql`
+  mutation CreatePost($input: CreatePostInput!) {
+    createPost(createPostInput: $input) {
+      id
+   
+    }
   }
 `;

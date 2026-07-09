@@ -15,7 +15,7 @@ const PostCard = ({
    <div className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
   <div className="relative w-full h-60">
     <img
-    src={thumbnail || "/no-image.png"}
+    src={thumbnail || "../../public/no-image.png"}
     alt={title || "No image"}
     className="w-full h-full object-cover"
   />

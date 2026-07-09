@@ -34,13 +34,13 @@ export const authFetchQl = async (query: string, variables = {}) => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
   };
-
-  console.log('session?.accessToken',session);
   
 
   if (session?.accessToken) {
     headers["Authorization"] = `Bearer ${session.accessToken}`;
   }
+
+  console.log("authFetchQl headers", variables);
 
   try {
     const response = await fetch(`${BACKEND_URL}/graphql`, {

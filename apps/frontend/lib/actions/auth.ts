@@ -62,7 +62,6 @@ export const signInAction = async (
       errors: data.errors,
     };
   }
-   console.log('createSessionaccessToken',data.data?.accessToken);
   await createSession({
     user: {
       name: data?.signIn.name,
