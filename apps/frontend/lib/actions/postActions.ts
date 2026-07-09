@@ -8,6 +8,7 @@ import { transformTakeSkip } from "../helper";
 import { gql } from "graphql-tag";
 import { PostCreateFormState } from "../types/formState";
 import { PostCreateSchema } from "../zodSchemas/PostCreateFormSchema";
+import { uploadThumbnail } from "../upload";
 
 
 export const fetchPosts = async ({page, perPage}: {page?: any, perPage?: any}) => {
@@ -53,8 +54,10 @@ export const PostCreateAction = async (
     };
   }
 
-  const thumbnailUrl = '';
-  console.log("validatedFields.data", validatedFields.data);
+  let thumbnailUrl = '';
+  if(validatedFields.data.thumbnail) {
+    thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail);
+  }
 
   const data = await authFetchQl(print(CREATE_POST_MUTATION), {
     input: { ...validatedFields.data, thumbnail: thumbnailUrl },
